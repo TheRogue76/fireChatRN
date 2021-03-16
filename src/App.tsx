@@ -1,15 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import React from 'react';
-import type {Node} from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -27,9 +18,19 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {connect} from 'react-redux';
 
-const Section = ({children, title}): Node => {
+import {InitialStateProps, Profile} from './interfaces';
+import {login, PayLoad} from './store/login/login';
+
+interface Props {
+  profile: Profile;
+  login: (payload: PayLoad) => void;
+}
+
+const Section = (props: {children: any; title: string}) => {
   const isDarkMode = useColorScheme() === 'dark';
+  const {children, title} = props;
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -54,13 +55,17 @@ const Section = ({children, title}): Node => {
   );
 };
 
-const App: () => Node = () => {
+const App = (props: Props) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
+  useEffect(() => {
+    props.login({username: 'Parsa', token: 'SuperSecureToken'});
+    console.log(props.profile);
+  }, []);
+  console.log(props.profile);
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -110,5 +115,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default App;
+const mapStateToProps = (state: InitialStateProps) => {
+  return {
+    profile: state.profile,
+  };
+};
+const mapDispatchToProps = {login};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
