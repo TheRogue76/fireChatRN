@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {colors} from '../config/colors';
 
 const LaunchPage = () => {
+  const navigation = useNavigation();
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('Login');
+    }, 500);
+  }, [navigation]);
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -23,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-    flex: 3,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },

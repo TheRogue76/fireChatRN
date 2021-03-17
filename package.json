@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "android-release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "clean-start": "react-native start --reset-cache",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "clean": "yarn cache clean && rm -rf node_modules && rm yarn.lock && yarn && cd ios && pod update && pod install && cd .. && watchman watch-del-all"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
