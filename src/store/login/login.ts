@@ -24,21 +24,21 @@ export function login(payLoad: PayLoad) {
     token: payLoad.token,
   };
 }
-export function* fetchLogin(payload: ReturnType<typeof login>) {
+export function* fetchLogin(loginPayload: ReturnType<typeof login>) {
   try {
-    const response = yield call(apiCall, payload);
+    const response = yield call(apiCall, loginPayload);
     if (response.status === 200) {
-      yield put({...payload, type: REQUEST_LOGIN_SUCCESSFUL});
+      yield put({...loginPayload, type: REQUEST_LOGIN_SUCCESSFUL});
     } else {
-      yield put({...payload, type: REQUEST_LOGIN_FAILURE});
+      yield put({...loginPayload, type: REQUEST_LOGIN_FAILURE});
     }
   } catch (e) {
     console.log(e);
   }
 }
 
-function apiCall(payload: PayLoad) {
-  console.log(`the apiCall function was called with:${payload}`);
+function apiCall(loginPayload: ReturnType<typeof login>) {
+  console.log(`the apiCall function was called with:${loginPayload}`);
   return {
     status: 200,
     verified: true,

@@ -1,123 +1,42 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import React from 'react';
 import {connect} from 'react-redux';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {InitialStateProps, Profile} from './interfaces';
-import {login, PayLoad} from './store/login/login';
+import LoginPage from './pages/LoginPage';
+import LaunchPage from './pages/LaunchPage';
+
+import {InitialStateProps} from './interfaces';
+
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 interface Props {
-  profile: Profile;
-  login: (payload: PayLoad) => void;
+  isLoggedIn: boolean;
 }
 
-const Section = (props: {children: any; title: string}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const {children, title} = props;
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
 const App = (props: Props) => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-  useEffect(() => {
-    props.login({username: 'Parsa', token: 'SuperSecureToken'});
-  }, []);
-  console.log(props.profile);
+  const {isLoggedIn} = props;
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      {!isLoggedIn && (
+        <Stack.Navigator headerMode="none" initialRouteName="Launch">
+          <Stack.Screen name="Launch" component={LaunchPage} />
+          <Stack.Screen name="Login" component={LoginPage} />
+        </Stack.Navigator>
+      )}
+      {isLoggedIn && (
+        <Drawer.Navigator initialRouteName="">
+          <Drawer.Screen name={} component={} />
+        </Drawer.Navigator>
+      )}
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 const mapStateToProps = (state: InitialStateProps) => {
   return {
-    profile: state.profile,
+    isLoggedIn: state.profile.isLoggedIn,
   };
 };
-const mapDispatchToProps = {login};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);
