@@ -8,27 +8,32 @@ export const REQUEST_LOGIN_FAILURE = 'REQUEST_LOGIN_FAILURE';
 
 export interface PayLoad {
   username: string;
-  token: string;
+  password: string;
 }
 interface Action extends PayLoad {
   type:
     | 'REQUEST_LOGIN_REQUESTED'
     | 'REQUEST_LOGIN_SUCCESSFUL'
     | 'REQUEST_LOGIN_FAILURE';
+  token?: string;
 }
 
 export function login(payLoad: PayLoad) {
   return {
     type: REQUEST_LOGIN_REQUESTED,
     username: payLoad.username,
-    token: payLoad.token,
+    password: payLoad.password,
   };
 }
 export function* fetchLogin(loginPayload: ReturnType<typeof login>) {
   try {
     const response = yield call(apiCall, loginPayload);
     if (response.status === 200) {
-      yield put({...loginPayload, type: REQUEST_LOGIN_SUCCESSFUL});
+      yield put({
+        ...loginPayload,
+        type: REQUEST_LOGIN_SUCCESSFUL,
+        token: response.token,
+      });
     } else {
       yield put({...loginPayload, type: REQUEST_LOGIN_FAILURE});
     }
@@ -38,10 +43,9 @@ export function* fetchLogin(loginPayload: ReturnType<typeof login>) {
 }
 
 function apiCall(loginPayload: ReturnType<typeof login>) {
-  console.log(`the apiCall function was called with:${loginPayload}`);
   return {
     status: 200,
-    verified: true,
+    token: 'serverToken',
   };
 }
 
@@ -55,10 +59,12 @@ export function reducer(state = initialState, action: Action) {
       copyState.profile.loading = true;
       return copyState;
     case REQUEST_LOGIN_SUCCESSFUL:
-      copyState.profile.username = action.username;
-      copyState.profile.token = action.token;
-      copyState.profile.isLoggedIn = true;
-      copyState.profile.loading = false;
+      if (action.token) {
+        copyState.profile.username = action.username;
+        copyState.profile.token = action.token;
+        copyState.profile.isLoggedIn = true;
+        copyState.profile.loading = false;
+      }
       return copyState;
     case REQUEST_LOGIN_FAILURE:
       copyState.profile.username = '';

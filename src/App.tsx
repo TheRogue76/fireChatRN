@@ -35,7 +35,7 @@ const App = (props: Props) => {
         </Stack.Navigator>
       )}
       {isLoggedIn && (
-        <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Navigator initialRouteName="Home" drawerType="front">
           <Drawer.Screen name="Home" component={HomePage} />
         </Drawer.Navigator>
       )}
