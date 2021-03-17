@@ -63,7 +63,6 @@ const App = (props: Props) => {
   };
   useEffect(() => {
     props.login({username: 'Parsa', token: 'SuperSecureToken'});
-    console.log(props.profile);
   }, []);
   console.log(props.profile);
   return (

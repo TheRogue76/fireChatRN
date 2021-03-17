@@ -1,3 +1,5 @@
+import {call, put} from 'redux-saga/effects';
+
 import {initialState} from '../initialState';
 
 export const REQUEST_LOGIN_REQUESTED = 'REQUEST_LOGIN_REQUESTED';
@@ -20,6 +22,26 @@ export function login(payLoad: PayLoad) {
     type: REQUEST_LOGIN_REQUESTED,
     username: payLoad.username,
     token: payLoad.token,
+  };
+}
+export function* fetchLogin(payload: ReturnType<typeof login>) {
+  try {
+    const response = yield call(apiCall, payload);
+    if (response.status === 200) {
+      yield put({...payload, type: REQUEST_LOGIN_SUCCESSFUL});
+    } else {
+      yield put({...payload, type: REQUEST_LOGIN_FAILURE});
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function apiCall(payload: PayLoad) {
+  console.log(`the apiCall function was called with:${payload}`);
+  return {
+    status: 200,
+    verified: true,
   };
 }
 
