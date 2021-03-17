@@ -1,7 +1,8 @@
 import {initialState} from './initialState';
-import {reducer as loginReducer} from './login/login';
+import {reducer as loginReducer} from './actions/login/login';
+import {reducer as logoutReducer} from './actions/logout/logout';
 
-const reducers = [loginReducer];
+const reducers = [loginReducer, logoutReducer];
 const rootReducer = (state = initialState, action: any) => {
   let newState;
   switch (action.type) {

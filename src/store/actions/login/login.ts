@@ -1,6 +1,6 @@
 import {call, put} from 'redux-saga/effects';
 
-import {initialState} from '../initialState';
+import {initialState} from '../../initialState';
 
 export const REQUEST_LOGIN_REQUESTED = 'REQUEST_LOGIN_REQUESTED';
 export const REQUEST_LOGIN_SUCCESSFUL = 'REQUEST_LOGIN_SUCCESSFUL';

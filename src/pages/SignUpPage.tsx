@@ -13,7 +13,7 @@ import {
 import {connect} from 'react-redux';
 
 import {InitialStateProps, Profile} from '../interfaces';
-import {login, PayLoad} from '../store/login/login';
+import {login, PayLoad} from '../store/actions/login/login';
 import { colors } from "../config/colors";
 
 interface Props {

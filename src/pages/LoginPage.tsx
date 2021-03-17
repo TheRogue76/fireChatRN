@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import SimpleInput from '../components/SimpleInput';
 import SimpleButton from '../components/SimpleButton';
 import {Profile} from '../interfaces';
-import {login, PayLoad} from '../store/login/login';
+import {login, PayLoad} from '../store/actions/login/login';
 import {colors} from '../config/colors';
 
 interface Props {

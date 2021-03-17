@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
+import {AppDrawer} from './components/AppDrawer';
 import {InitialStateProps} from './interfaces';
 
 const Stack = createStackNavigator();
@@ -35,7 +36,10 @@ const App = (props: Props) => {
         </Stack.Navigator>
       )}
       {isLoggedIn && (
-        <Drawer.Navigator initialRouteName="Home" drawerType="front">
+        <Drawer.Navigator
+          initialRouteName="Home"
+          drawerType="front"
+          drawerContent={AppDrawer}>
           <Drawer.Screen name="Home" component={HomePage} />
         </Drawer.Navigator>
       )}
