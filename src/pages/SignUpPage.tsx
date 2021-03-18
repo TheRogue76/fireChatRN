@@ -1,20 +1,17 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import {
-  // SafeAreaView,
-  // ScrollView,
-  // StatusBar,
+  KeyboardAvoidingView,
   StyleSheet,
   Text,
-  // useColorScheme,
-  View,
+  TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
 
-import {InitialStateProps, Profile} from '../interfaces';
+import SimpleInput from '../components/SimpleInput';
+import SimpleButton from '../components/SimpleButton';
+import {Profile} from '../interfaces';
 import {login, PayLoad} from '../store/actions/login/login';
-import { colors } from "../config/colors";
+import {colors} from '../config/colors';
 
 interface Props {
   profile: Profile;
@@ -22,11 +19,38 @@ interface Props {
 }
 
 const SignUpPage = (props: Props) => {
-  // const isDarkMode = useColorScheme() === 'dark';
+  const [userName, setUserName] = useState<string>('');
+  const [passWord, setPassWord] = useState<string>('');
+  const passwordRef = useRef<TextInput>(null);
+  const {login} = props;
+  const handlePress = () => {
+    login({username: userName, password: passWord});
+  };
+  const switchTextInput = () => {
+    if (passwordRef.current) {
+      passwordRef.current.focus();
+    }
+  };
   return (
-    <View style={styles.container}>
-      <Text>Hello {props.profile.username} !</Text>
-    </View>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <SimpleInput
+        style={[styles.width, styles.marginBottom]}
+        onChangeText={setUserName}
+        value={userName}
+        onSubmitEditing={switchTextInput}
+      />
+      <SimpleInput
+        ref={passwordRef}
+        style={[styles.width, styles.marginBottom]}
+        onChangeText={setPassWord}
+        value={passWord}
+        autoCompleteType="password"
+        secureTextEntry={true}
+      />
+      <SimpleButton onPress={handlePress} style={styles.width}>
+        <Text>Login</Text>
+      </SimpleButton>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -35,13 +59,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: colors.brandBlue,
+  },
+  width: {
+    width: '80%',
+  },
+  marginBottom: {
+    marginBottom: 20,
   },
 });
-const mapStateToProps = (state: InitialStateProps) => {
-  return {
-    profile: state.profile,
-  };
-};
 const mapDispatchToProps = {login};
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
+export default connect(null, mapDispatchToProps)(SignUpPage);

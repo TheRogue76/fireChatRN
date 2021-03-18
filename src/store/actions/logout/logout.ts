@@ -16,7 +16,6 @@ export const reducer = (state = initialState, action: Action) => {
   let copyState = Object.assign({}, state);
   switch (action.type) {
     case 'REQUEST_LOGOUT_REQUEST':
-      console.log(initialState);
       copyState.profile.isLoggedIn = false;
       copyState.profile.username = '';
       copyState.profile.loading = false;
