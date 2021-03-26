@@ -38,6 +38,7 @@ const LoginPage = (props: Props) => {
         onChangeText={setUserName}
         value={userName}
         onSubmitEditing={switchTextInput}
+        placeholder="Enter Username"
       />
       <SimpleInput
         ref={passwordRef}
@@ -45,6 +46,7 @@ const LoginPage = (props: Props) => {
         onChangeText={setPassWord}
         value={passWord}
         autoCompleteType="password"
+        placeholder="Enter Password"
         secureTextEntry={true}
       />
       <SimpleButton onPress={handlePress} style={styles.width}>

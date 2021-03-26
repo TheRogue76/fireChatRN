@@ -8,9 +8,19 @@ import SimpleButton from '../components/SimpleButton';
 import {colors} from '../config/colors';
 
 const SignUpPage = () => {
+  // States
   const [userName, setUserName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [passWord, setPassWord] = useState<string>('');
-  const passwordRef = useRef<TextInput>(null);
+  const [conf, setConf] = useState<string>('');
+  // Refrences
+  const textRefs = useRef<TextInput[]>([]);
+  const refSetup = (element: TextInput) => {
+    if (element !== null) {
+      textRefs.current.push(element);
+    }
+  };
+  // Navigation
   const navigation = useNavigation();
   const handlePress = () => {
     console.log('successfull signup');
@@ -19,23 +29,43 @@ const SignUpPage = () => {
     navigation.navigate('Login');
   };
   const switchTextInput = () => {
-    if (passwordRef.current) {
-      passwordRef.current.focus();
-    }
+    let index = textRefs.current.findIndex(el => el.isFocused());
+    textRefs.current[index + 1].focus();
   };
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <SimpleInput
         style={[styles.width, styles.marginBottom]}
-        onChangeText={setUserName}
-        value={userName}
+        ref={refSetup}
+        onChangeText={setEmail}
+        value={email}
+        placeholder="Enter your E-Mail"
         onSubmitEditing={switchTextInput}
       />
       <SimpleInput
-        ref={passwordRef}
+        ref={refSetup}
+        style={[styles.width, styles.marginBottom]}
+        onChangeText={setUserName}
+        value={userName}
+        placeholder="Enter your Username"
+        onSubmitEditing={switchTextInput}
+      />
+      <SimpleInput
+        ref={refSetup}
         style={[styles.width, styles.marginBottom]}
         onChangeText={setPassWord}
         value={passWord}
+        placeholder="Enter your Password"
+        autoCompleteType="password"
+        secureTextEntry={true}
+        onSubmitEditing={switchTextInput}
+      />
+      <SimpleInput
+        ref={refSetup}
+        style={[styles.width, styles.marginBottom]}
+        onChangeText={setConf}
+        value={conf}
+        placeholder="Confirm your Password"
         autoCompleteType="password"
         secureTextEntry={true}
       />
