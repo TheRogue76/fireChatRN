@@ -3,18 +3,15 @@ import {Platform} from 'react-native';
 import {connect} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import LaunchPage from './pages/LaunchPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
-import {AppDrawer} from './components/AppDrawer';
 import {InitialStateProps} from './interfaces';
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 interface Props {
   isLoggedIn: boolean;
@@ -36,12 +33,9 @@ const App = (props: Props) => {
         </Stack.Navigator>
       )}
       {isLoggedIn && (
-        <Drawer.Navigator
-          initialRouteName="Home"
-          drawerType="front"
-          drawerContent={AppDrawer}>
-          <Drawer.Screen name="Home" component={HomePage} />
-        </Drawer.Navigator>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={HomePage} />
+        </Stack.Navigator>
       )}
     </NavigationContainer>
   );
