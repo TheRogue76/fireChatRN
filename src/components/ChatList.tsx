@@ -12,7 +12,10 @@ const ChatList = () => {
   const FlatListRef = useRef<FlatList>(null);
   const state: Item[] = [
     {sender: 'Parsa', text: 'Hello'},
-    {sender: 'Imaginary', text: 'Lol you fucking loser'},
+    {
+      sender: 'Imaginary',
+      text: 'Lol you fucking loserasdasdasdasdasdasdasdasdasdas',
+    },
     {sender: 'Parsa', text: 'rude'},
     {sender: 'third dude', text: 'it is true'},
   ];
@@ -33,6 +36,7 @@ const ChatList = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.screechingWhite,
+    paddingTop: 10,
   },
 });
 export default ChatList;

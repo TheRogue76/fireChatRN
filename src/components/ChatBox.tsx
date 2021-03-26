@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   rightArrowOverlap: {
     position: 'absolute',
-    backgroundColor: colors.kinglyCloud,
+    backgroundColor: colors.screechingWhite,
     width: 20,
     height: 35,
     bottom: -6,
