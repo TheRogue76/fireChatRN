@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform} from 'react-native';
+import {Platform, Pressable, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -10,20 +10,25 @@ import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
 import {InitialStateProps} from './interfaces';
+import {logout} from './store/actions/logout/logout';
 
 const Stack = createStackNavigator();
 
 interface Props {
   isLoggedIn: boolean;
+  logout: () => void;
 }
 
 const App = (props: Props) => {
-  const {isLoggedIn} = props;
+  const {isLoggedIn, logout} = props;
+  const handlePress = () => {
+    logout();
+  };
   return (
     <NavigationContainer>
       {!isLoggedIn && (
         <Stack.Navigator
-          headerMode="none"
+          screenOptions={{headerShown: false}}
           initialRouteName={Platform.OS !== 'ios' ? 'Launch' : 'Login'}>
           {Platform.OS !== 'ios' && (
             <Stack.Screen name="Launch" component={LaunchPage} />
@@ -34,15 +39,32 @@ const App = (props: Props) => {
       )}
       {isLoggedIn && (
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomePage} />
+          <Stack.Screen
+            name="Home"
+            component={HomePage}
+            options={{
+              title: 'FlashChat',
+              headerRight: () => (
+                <Pressable onPress={handlePress} style={styles.logoutButton}>
+                  <Text>Logout</Text>
+                </Pressable>
+              ),
+            }}
+          />
         </Stack.Navigator>
       )}
     </NavigationContainer>
   );
 };
+const styles = StyleSheet.create({
+  logoutButton: {
+    marginRight: 20,
+  },
+});
 const mapStateToProps = (state: InitialStateProps) => {
   return {
     isLoggedIn: state.profile.isLoggedIn,
   };
 };
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = {logout};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

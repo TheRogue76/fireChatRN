@@ -1,29 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import React from 'react';
-import {
-  // SafeAreaView,
-  // ScrollView,
-  // StatusBar,
-  StyleSheet,
-  Text,
-  // useColorScheme,
-  View,
-} from 'react-native';
-import {connect} from 'react-redux';
+import {StyleSheet, View} from 'react-native';
 
-import {InitialStateProps, Profile} from '../interfaces';
+import ChatList from '../components/ChatList';
+
 import {colors} from '../config/colors';
 
-interface Props {
-  profile: Profile;
-}
-
-const HomePage = (props: Props) => {
-  // const isDarkMode = useColorScheme() === 'dark';
+const HomePage = () => {
   return (
     <View style={styles.container}>
-      <Text>Hello {props.profile.username} !</Text>
+      <ChatList />
     </View>
   );
 };
@@ -31,14 +16,8 @@ const HomePage = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 10,
     backgroundColor: colors.white,
   },
 });
-const mapStateToProps = (state: InitialStateProps) => {
-  return {
-    profile: state.profile,
-  };
-};
-export default connect(mapStateToProps, null)(HomePage);
+export default HomePage;
