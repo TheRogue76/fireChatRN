@@ -1,11 +1,7 @@
 import React, {useState, useRef} from 'react';
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
-} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, Text, TextInput} from 'react-native';
 import {connect} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 import SimpleInput from '../components/SimpleInput';
 import SimpleButton from '../components/SimpleButton';
@@ -22,9 +18,13 @@ const LoginPage = (props: Props) => {
   const [userName, setUserName] = useState<string>('');
   const [passWord, setPassWord] = useState<string>('');
   const passwordRef = useRef<TextInput>(null);
+  const navigation = useNavigation();
   const {login} = props;
   const handlePress = () => {
     login({username: userName, password: passWord});
+  };
+  const goToSignUpPage = () => {
+    navigation.navigate('SignUp');
   };
   const switchTextInput = () => {
     if (passwordRef.current) {
@@ -49,6 +49,9 @@ const LoginPage = (props: Props) => {
       />
       <SimpleButton onPress={handlePress} style={styles.width}>
         <Text>Login</Text>
+      </SimpleButton>
+      <SimpleButton onPress={goToSignUpPage} style={styles.width}>
+        <Text>Sign Up</Text>
       </SimpleButton>
     </KeyboardAvoidingView>
   );

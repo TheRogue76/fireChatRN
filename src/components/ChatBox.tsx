@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 
 import {InitialStateProps} from '../interfaces';
+import {colors} from '../config/colors';
 
 interface Props {
   sender: string;
@@ -38,7 +39,7 @@ const ChatBox = (props: Props) => {
 };
 const styles = StyleSheet.create({
   containerSelf: {
-    backgroundColor: '#0078fe',
+    backgroundColor: colors.iMessageBlue,
     padding: 10,
     marginLeft: '45%',
     marginTop: 5,
@@ -47,9 +48,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     borderRadius: 20,
   },
-  selfText: {fontSize: 16, color: '#fff'},
+  selfText: {fontSize: 16, color: colors.white},
   containerOther: {
-    backgroundColor: '#dedede',
+    backgroundColor: colors.kinglyCloud,
     padding: 10,
     marginTop: 5,
     marginLeft: '5%',
@@ -57,31 +58,28 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     borderRadius: 20,
   },
-  otherText: {fontSize: 16, color: '#000', justifyContent: 'center'},
+  otherText: {fontSize: 16, color: colors.black, justifyContent: 'center'},
   rightArrow: {
     position: 'absolute',
-    backgroundColor: '#0078fe',
+    backgroundColor: colors.iMessageBlue,
     width: 20,
     height: 25,
     bottom: 0,
     borderBottomLeftRadius: 25,
     right: -10,
   },
-
   rightArrowOverlap: {
     position: 'absolute',
-    backgroundColor: '#eeeeee',
+    backgroundColor: colors.kinglyCloud,
     width: 20,
     height: 35,
     bottom: -6,
     borderBottomLeftRadius: 18,
     right: -20,
   },
-
-  /*Arrow head for recevied messages*/
   leftArrow: {
     position: 'absolute',
-    backgroundColor: '#dedede',
+    backgroundColor: colors.kinglyCloud,
     width: 20,
     height: 25,
     bottom: 0,
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
 
   leftArrowOverlap: {
     position: 'absolute',
-    backgroundColor: '#eeeeee',
+    backgroundColor: colors.screechingWhite,
     width: 20,
     height: 35,
     bottom: -6,

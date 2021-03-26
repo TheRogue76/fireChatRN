@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import ChatBox from './ChatBox';
+import {colors} from '../config/colors';
 
 export interface Item {
   text: string;
@@ -31,7 +32,7 @@ const ChatList = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#eeeeee',
+    backgroundColor: colors.screechingWhite,
   },
 });
 export default ChatList;
