@@ -5,7 +5,14 @@ import {Provider} from 'react-redux';
 
 import App from './src/App';
 import {store} from './src/store/store';
+import {saveState} from './src/store/storeStorage';
 import {name as appName} from './app.json';
+
+store.subscribe(() => {
+  saveState(store.getState()).then(() => {
+    // do sth upon successful state save
+  });
+});
 
 const ProvidedApp = () => {
   return (
