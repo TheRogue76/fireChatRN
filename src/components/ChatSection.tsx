@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {Text, StyleSheet, Pressable, View} from 'react-native';
 
 import {colors} from '../config/colors';
 import ChatInput from './ChatInput';
@@ -20,8 +20,8 @@ const ChatSection = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    height: 100,
     flexDirection: 'row',
+    height: '100%',
   },
   input: {
     width: '85%',

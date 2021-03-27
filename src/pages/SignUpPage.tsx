@@ -1,11 +1,13 @@
 import React, {useState, useRef} from 'react';
-import {KeyboardAvoidingView, StyleSheet, Text, TextInput} from 'react-native';
+import {StyleSheet, Text, TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
+import {colors} from '../config/colors';
+
 import SimpleInput from '../components/SimpleInput';
 import SimpleButton from '../components/SimpleButton';
-import {colors} from '../config/colors';
+import PlatformView from '../components/PlatformView';
 
 const SignUpPage = () => {
   // States
@@ -33,7 +35,7 @@ const SignUpPage = () => {
     textRefs.current[index + 1].focus();
   };
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <PlatformView style={styles.container}>
       <SimpleInput
         style={[styles.width, styles.marginBottom]}
         ref={refSetup}
@@ -75,7 +77,7 @@ const SignUpPage = () => {
       <SimpleButton onPress={goToLoginPage} style={styles.width}>
         <Text>Login</Text>
       </SimpleButton>
-    </KeyboardAvoidingView>
+    </PlatformView>
   );
 };
 

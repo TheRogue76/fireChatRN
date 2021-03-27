@@ -1,5 +1,11 @@
 import React, {useRef} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {
+  FlatList,
+  FlatListProps,
+  StyleProp,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 import ChatBox from './ChatBox';
 import {colors} from '../config/colors';
 
@@ -8,7 +14,11 @@ export interface Item {
   sender: string;
 }
 
-const ChatList = () => {
+// interface Props {
+//   style: StyleProp<ViewStyle>;
+// }
+
+const ChatList = (props: Props) => {
   const FlatListRef = useRef<FlatList>(null);
   const state: Item[] = [
     {sender: 'Parsa', text: 'Hello'},
@@ -21,7 +31,7 @@ const ChatList = () => {
   ];
   return (
     <FlatList
-      style={styles.container}
+      style={[styles.container, props.style]}
       data={state}
       ref={FlatListRef}
       renderItem={({item, index}: {item: Item; index: number}) => (
@@ -37,6 +47,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.screechingWhite,
     paddingTop: 10,
+    flex: 1,
   },
 });
 export default ChatList;

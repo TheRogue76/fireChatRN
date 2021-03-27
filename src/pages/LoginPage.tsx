@@ -1,13 +1,15 @@
 import React, {useState, useRef} from 'react';
-import {KeyboardAvoidingView, StyleSheet, Text, TextInput} from 'react-native';
+import {StyleSheet, Text, TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
-import SimpleInput from '../components/SimpleInput';
-import SimpleButton from '../components/SimpleButton';
 import {Profile} from '../interfaces';
 import {login, PayLoad} from '../store/actions/login/login';
 import {colors} from '../config/colors';
+
+import SimpleInput from '../components/SimpleInput';
+import SimpleButton from '../components/SimpleButton';
+import PlatformView from '../components/PlatformView';
 
 interface Props {
   profile: Profile;
@@ -32,7 +34,7 @@ const LoginPage = (props: Props) => {
     }
   };
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <PlatformView style={styles.container}>
       <SimpleInput
         style={[styles.width, styles.marginBottom]}
         onChangeText={setUserName}
@@ -55,7 +57,7 @@ const LoginPage = (props: Props) => {
       <SimpleButton onPress={goToSignUpPage} style={styles.width}>
         <Text>Sign Up</Text>
       </SimpleButton>
-    </KeyboardAvoidingView>
+    </PlatformView>
   );
 };
 
