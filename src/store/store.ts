@@ -7,13 +7,13 @@ import rootReducer from './rootReducer';
 import {saga} from './rootSaga';
 import {loadState} from './storeStorage';
 
-// Storage
-RNAsyncStorageFlipper(AsyncStorage);
 // Saga setup
 const sagaMiddleWare = createSagaMiddleware();
 const middlewares = [sagaMiddleWare];
 
 if (__DEV__) {
+  // Storage
+  RNAsyncStorageFlipper(AsyncStorage);
   const createDebugger = require('redux-flipper').default;
   middlewares.push(createDebugger());
 }
