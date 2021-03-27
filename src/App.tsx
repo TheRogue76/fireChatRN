@@ -43,7 +43,7 @@ const App = (props: Props) => {
             name="Home"
             component={HomePage}
             options={{
-              title: 'FlashChat',
+              title: 'Fire Chat',
               headerRight: () => (
                 <Pressable onPress={handlePress} style={styles.logoutButton}>
                   <Text>Logout</Text>
