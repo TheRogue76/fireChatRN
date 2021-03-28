@@ -8,13 +8,12 @@ import SimpleButton from '../components/SimpleButton';
 import PlatformView from '../components/PlatformView';
 
 interface Props {
-  handlePress: () => void;
+  handlePress: (email: string, password: string) => void;
   goToLoginPage: () => void;
 }
 
 const SignUp = (props: Props) => {
   const {handlePress, goToLoginPage} = props;
-  const [userName, setUserName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [passWord, setPassWord] = useState<string>('');
   const [conf, setConf] = useState<string>('');
@@ -28,6 +27,13 @@ const SignUp = (props: Props) => {
     let index = textRefs.current.findIndex(el => el.isFocused());
     textRefs.current[index + 1].focus();
   };
+  const checkBeforeSubmitting = () => {
+    if (conf === passWord) {
+      handlePress(email, passWord);
+    } else {
+      console.log('password and confirmation do not match');
+    }
+  };
   return (
     <PlatformView style={styles.container}>
       <SimpleInput
@@ -36,14 +42,6 @@ const SignUp = (props: Props) => {
         onChangeText={setEmail}
         value={email}
         placeholder="Enter your E-Mail"
-        onSubmitEditing={switchTextInput}
-      />
-      <SimpleInput
-        ref={refSetup}
-        style={[styles.width, styles.marginBottom]}
-        onChangeText={setUserName}
-        value={userName}
-        placeholder="Enter your Username"
         onSubmitEditing={switchTextInput}
       />
       <SimpleInput
@@ -65,7 +63,7 @@ const SignUp = (props: Props) => {
         autoCompleteType="password"
         secureTextEntry={true}
       />
-      <SimpleButton onPress={handlePress} style={styles.width}>
+      <SimpleButton onPress={checkBeforeSubmitting} style={styles.width}>
         <Text>Sign Up</Text>
       </SimpleButton>
       <SimpleButton onPress={goToLoginPage} style={styles.width}>

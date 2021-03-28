@@ -10,8 +10,16 @@ PODS:
     - React-Core (= 0.64.0)
     - React-jsi (= 0.64.0)
     - ReactCommon/turbomodule/core (= 0.64.0)
+  - Firebase/Auth (7.9.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 7.9.0)
   - Firebase/CoreOnly (7.9.0):
     - FirebaseCore (= 7.9.0)
+  - FirebaseAuth (7.9.0):
+    - FirebaseCore (~> 7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
   - FirebaseCore (7.9.0):
     - FirebaseCoreDiagnostics (~> 7.4)
     - GoogleUtilities/Environment (~> 7.0)
@@ -72,10 +80,22 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30907.0)
     - PromisesObjC (~> 1.2)
+  - GoogleUtilities/AppDelegateSwizzler (7.3.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
   - GoogleUtilities/Environment (7.3.1):
     - PromisesObjC (~> 1.2)
   - GoogleUtilities/Logger (7.3.1):
     - GoogleUtilities/Environment
+  - GoogleUtilities/Network (7.3.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.3.1)"
+  - GoogleUtilities/Reachability (7.3.1):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.5.0)
   - hermes-engine (0.7.2)
   - libevent (2.1.12)
   - nanopb (2.30907.0):
@@ -368,6 +388,10 @@ PODS:
   - RNFBApp (11.2.0):
     - Firebase/CoreOnly (= 7.9.0)
     - React-Core
+  - RNFBAuth (11.2.0):
+    - Firebase/Auth (= 7.9.0)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (1.10.3):
     - React-Core
   - RNReanimated (2.0.0):
@@ -462,6 +486,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
+  - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -472,6 +497,7 @@ SPEC REPOS:
     - boost-for-react-native
     - CocoaAsyncSocket
     - Firebase
+    - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - Flipper
@@ -483,6 +509,7 @@ SPEC REPOS:
     - FlipperKit
     - GoogleDataTransport
     - GoogleUtilities
+    - GTMSessionFetcher
     - hermes-engine
     - libevent
     - nanopb
@@ -555,6 +582,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
+  RNFBAuth:
+    :path: "../node_modules/@react-native-firebase/auth"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -571,6 +600,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 49cbe4b43e445b06bf29199b6ad2057649e4c8f5
   FBReactNativeSpec: 83566029dd7b813f3dfcf17a7b901865b72db738
   Firebase: d8bd6bd34b4c7ed57bfdd056c66ff5adcdde53ab
+  FirebaseAuth: 20625f04fdd213995249a82375b3dab39b1c136c
   FirebaseCore: 0798738ad1ae0fda67e17c7b9081241c431c6859
   FirebaseCoreDiagnostics: 3d36e05da74cb8b7ce30e6594a8f201b982c725c
   Flipper: d3da1aa199aad94455ae725e9f3aa43f3ec17021
@@ -583,6 +613,7 @@ SPEC CHECKSUMS:
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   GoogleDataTransport: b006084b73915a42c28a3466961a4edda3065da6
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   hermes-engine: 7d97ba46a1e29bacf3e3c61ecb2804a5ddd02d4f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -616,6 +647,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: fe58eec522885718d6b297b7b658bf87d7ca557b
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: d9ab9f2e63c70a9974294bb44c749b728cd4028f
+  RNFBAuth: 73ef569faa4618624313fbc969dfaba66bb6d0ed
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: 64f6c5789f82818c07ba3c71864b73619cb23c76
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d

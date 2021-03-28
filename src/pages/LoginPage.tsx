@@ -14,7 +14,7 @@ const LoginPage = (props: Props) => {
   const navigation = useNavigation();
   const {login} = props;
   const handlePress = (userName: string, passWord: string) => {
-    login({username: userName, password: passWord});
+    login({email: userName, password: passWord});
   };
   const goToSignUpPage = () => {
     navigation.navigate('SignUp');

@@ -9,14 +9,14 @@ interface Props {
   sender: string;
   index: number;
   children: string;
-  username: string;
+  email: string;
 }
 
 const ChatBox = (props: Props) => {
-  const {sender, index, children, username} = props;
+  const {sender, index, children, email} = props;
   return (
     <>
-      {sender === username ? (
+      {sender === email ? (
         <View style={styles.containerSelf} key={index}>
           <Text style={styles.selfText} key={index}>
             {children}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state: InitialStateProps) => {
   return {
-    username: state.profile.username,
+    email: state.profile.email,
   };
 };
 export default connect(mapStateToProps, null)(ChatBox);

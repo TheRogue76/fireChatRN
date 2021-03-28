@@ -4,14 +4,23 @@ import {useNavigation} from '@react-navigation/native';
 
 import SignUp from '../layouts/SignUp';
 
-const SignUpPage = () => {
+import {signup} from '../store/actions/signup/signup';
+import {SignUpProps} from '../interfaces';
+
+interface Props {
+  signup: (payload: SignUpProps) => void;
+}
+
+const SignUpPage = (props: Props) => {
+  const {signup} = props;
   const navigation = useNavigation();
-  const handlePress = () => {
-    console.log('successful signup');
+  const handlePress = (email: string, password: string) => {
+    signup({email: email, password: password});
   };
   const goToLoginPage = () => {
     navigation.navigate('Login');
   };
   return <SignUp handlePress={handlePress} goToLoginPage={goToLoginPage} />;
 };
-export default connect(null, null)(SignUpPage);
+const mapDispatchToProps = {signup};
+export default connect(null, mapDispatchToProps)(SignUpPage);

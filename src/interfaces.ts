@@ -3,7 +3,16 @@ export interface InitialStateProps {
 }
 export interface Profile {
   isLoggedIn: boolean;
-  username: string;
-  token: string;
+  email: string;
   loading: boolean;
+}
+
+export interface SignUpProps {
+  email: string;
+  password: string;
+}
+
+export interface LoginProps {
+  email: string;
+  password: string;
 }
