@@ -40,8 +40,9 @@ export function* fetchSignup(signupPayload: ReturnType<typeof signup>) {
       email: signupPayload.email,
       password: signupPayload.password,
     });
+
     if (response) {
-      yield put({type: SUCCESS_SIGNUP_REQUEST, email: response});
+      yield put({type: SUCCESS_SIGNUP_REQUEST, data: response});
     } else if (error) {
       yield put({type: FAILURE_SIGNUP_REQUEST});
     } else {
@@ -54,17 +55,20 @@ export function* fetchSignup(signupPayload: ReturnType<typeof signup>) {
 
 export function reducer(state: InitialStateProps, action: Action) {
   const copyState = Object.assign({}, state);
+
   switch (action.type) {
     case REQUEST_SIGNUP_REQUEST:
       copyState.profile.email = '';
       copyState.profile.loading = true;
       copyState.profile.isLoggedIn = false;
       return copyState;
+
     case SUCCESS_SIGNUP_REQUEST:
       copyState.profile.isLoggedIn = true;
       copyState.profile.loading = false;
       copyState.profile.email = action.data.user.email;
       return copyState;
+
     case FAILURE_SIGNUP_REQUEST:
       copyState.profile.email = '';
       copyState.profile.loading = false;

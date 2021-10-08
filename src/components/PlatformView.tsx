@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingViewProps,
   View,
 } from 'react-native';
-import {useHeaderHeight} from '@react-navigation/stack';
+import {useHeaderHeight} from '@react-navigation/elements';
 
 interface Props extends KeyboardAvoidingViewProps {
   children: JSX.Element | JSX.Element[];

@@ -40,32 +40,37 @@ export function* fetchLogin(loginPayload: ReturnType<typeof login>) {
       email: loginPayload.email,
       password: loginPayload.password,
     });
+
+    // console.log(response, error);
+
     if (response) {
-      yield put({type: REQUEST_LOGIN_SUCCESSFUL, email: response});
+      yield put({type: REQUEST_LOGIN_SUCCESSFUL, data: response});
     } else if (error) {
       yield put({type: REQUEST_LOGIN_FAILURE});
     } else {
       yield put({type: REQUEST_LOGIN_FAILURE});
     }
   } catch (e) {
-    console.log(e);
     yield put({type: REQUEST_LOGIN_FAILURE});
   }
 }
 
 export function reducer(state = initialState, action: Action) {
   const copyState = Object.assign({}, state);
+
   switch (action.type) {
     case REQUEST_LOGIN_REQUESTED:
       copyState.profile.email = '';
       copyState.profile.isLoggedIn = false;
       copyState.profile.loading = true;
       return copyState;
+
     case REQUEST_LOGIN_SUCCESSFUL:
       copyState.profile.email = action.data.user.email;
       copyState.profile.isLoggedIn = true;
       copyState.profile.loading = false;
       return copyState;
+
     case REQUEST_LOGIN_FAILURE:
       copyState.profile.email = '';
       copyState.profile.isLoggedIn = false;

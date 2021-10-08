@@ -1,14 +1,17 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 
 import {colors} from '@config';
 import {ChatList, ChatSection, PlatformView} from '@components';
+import {InitialStateProps} from '@src/interfaces';
 
 const Home = () => {
+  const email = useSelector((state: InitialStateProps) => state.profile.email);
   return (
     <PlatformView style={styles.container}>
       <View style={styles.list}>
-        <ChatList />
+        <ChatList email={email} />
       </View>
       <View style={styles.section}>
         <ChatSection />
