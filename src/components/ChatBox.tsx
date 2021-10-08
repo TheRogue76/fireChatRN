@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 
-import {InitialStateProps} from '../interfaces';
-import {colors} from '../config/colors';
+import {InitialStateProps} from '@src/interfaces';
+import {colors} from '@config';
 
 interface Props {
   sender: string;

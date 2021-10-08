@@ -1,7 +1,8 @@
 import {call, put} from 'redux-saga/effects';
 
-import {initialState} from '../../initialState';
-import {loginUser} from '../../../config/api';
+import {initialState} from '@store/initialState';
+import {apis} from '@config';
+import {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
 export const REQUEST_LOGIN_REQUESTED = 'REQUEST_LOGIN_REQUESTED';
 export const REQUEST_LOGIN_SUCCESSFUL = 'REQUEST_LOGIN_SUCCESSFUL';
@@ -12,11 +13,17 @@ export interface PayLoad {
   password: string;
 }
 
-interface Action extends PayLoad {
+interface Result {
+  response: FirebaseAuthTypes.UserCredential;
+  error: any;
+}
+
+interface Action {
   type:
-    | 'REQUEST_LOGIN_REQUESTED'
-    | 'REQUEST_LOGIN_SUCCESSFUL'
-    | 'REQUEST_LOGIN_FAILURE';
+    | typeof REQUEST_LOGIN_REQUESTED
+    | typeof REQUEST_LOGIN_SUCCESSFUL
+    | typeof REQUEST_LOGIN_FAILURE;
+  data?: FirebaseAuthTypes.UserCredential;
 }
 
 export function login(payLoad: PayLoad) {
@@ -29,14 +36,17 @@ export function login(payLoad: PayLoad) {
 
 export function* fetchLogin(loginPayload: ReturnType<typeof login>) {
   try {
-    yield call(loginUser, {
+    const {response, error}: Result = yield call(apis.loginUser, {
       email: loginPayload.email,
       password: loginPayload.password,
     });
-    yield put({
-      type: REQUEST_LOGIN_SUCCESSFUL,
-      email: loginPayload.email,
-    });
+    if (response) {
+      yield put({type: REQUEST_LOGIN_SUCCESSFUL, email: response});
+    } else if (error) {
+      yield put({type: REQUEST_LOGIN_FAILURE});
+    } else {
+      yield put({type: REQUEST_LOGIN_FAILURE});
+    }
   } catch (e) {
     console.log(e);
     yield put({type: REQUEST_LOGIN_FAILURE});
@@ -52,7 +62,7 @@ export function reducer(state = initialState, action: Action) {
       copyState.profile.loading = true;
       return copyState;
     case REQUEST_LOGIN_SUCCESSFUL:
-      copyState.profile.email = action.email;
+      copyState.profile.email = action.data.user.email;
       copyState.profile.isLoggedIn = true;
       copyState.profile.loading = false;
       return copyState;

@@ -7,11 +7,6 @@ export interface Profile {
   loading: boolean;
 }
 
-export interface SignUpProps {
-  email: string;
-  password: string;
-}
-
 export interface LoginProps {
   email: string;
   password: string;

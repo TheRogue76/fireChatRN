@@ -1,10 +1,21 @@
-import auth from '@react-native-firebase/auth';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
-import {LoginProps, SignUpProps} from '../interfaces';
+import {LoginProps} from '../interfaces';
 
-export const createUser = (payload: SignUpProps) => {
-  return auth().createUserWithEmailAndPassword(payload.email, payload.password);
+const createUser = (payload: {email: string; password: string}) => {
+  return auth()
+    .createUserWithEmailAndPassword(payload.email, payload.password)
+    .then((response: FirebaseAuthTypes.UserCredential) => ({response}))
+    .catch((error: any) => ({error}));
 };
-export const loginUser = (payload: LoginProps) => {
-  return auth().signInWithEmailAndPassword(payload.email, payload.password);
+const loginUser = (payload: LoginProps) => {
+  return auth()
+    .signInWithEmailAndPassword(payload.email, payload.password)
+    .then((response: FirebaseAuthTypes.UserCredential) => ({response}))
+    .catch((error: any) => ({error}));
+};
+
+export const apis = {
+  createUser,
+  loginUser,
 };

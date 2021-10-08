@@ -1,10 +1,10 @@
-import {initialState} from '../../initialState';
-
-interface Action {
-  type: 'REQUEST_LOGOUT_REQUEST';
-}
+import {initialState} from '@store/initialState';
 
 export const REQUEST_LOGOUT_REQUEST = 'REQUEST_LOGOUT_REQUEST';
+
+interface Action {
+  type: typeof REQUEST_LOGOUT_REQUEST;
+}
 
 export function logout() {
   return {
@@ -15,7 +15,7 @@ export function logout() {
 export const reducer = (state = initialState, action: Action) => {
   let copyState = Object.assign({}, state);
   switch (action.type) {
-    case 'REQUEST_LOGOUT_REQUEST':
+    case REQUEST_LOGOUT_REQUEST:
       copyState.profile.isLoggedIn = false;
       copyState.profile.email = '';
       copyState.profile.loading = false;
