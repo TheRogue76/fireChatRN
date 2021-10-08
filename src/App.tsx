@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Platform, Pressable, Text, StyleSheet, I18nManager} from 'react-native';
-import {connect} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -10,24 +10,29 @@ import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
 import {InitialStateProps} from './interfaces';
-import {logout} from './store/actions/logout/logout';
+import {logout} from '@store/actions';
+import {loadState} from '@store/storeStorage';
+
+if (!I18nManager.isRTL) {
+  I18nManager.allowRTL(true);
+  I18nManager.forceRTL(true);
+}
 
 const Stack = createStackNavigator();
 
-interface Props {
-  isLoggedIn: boolean;
-  logout: () => void;
-}
+const App = () => {
+  const isLoggedIn = useSelector(
+    (state: InitialStateProps) => state.profile.isLoggedIn,
+  );
 
-const App = (props: Props) => {
-  const {isLoggedIn, logout} = props;
-  if (!I18nManager.isRTL) {
-    I18nManager.allowRTL(true);
-    I18nManager.forceRTL(true);
-  }
+  const dispatch = useDispatch();
+
   const handlePress = () => {
-    logout();
+    dispatch(logout());
   };
+  useEffect(() => {
+    loadState();
+  }, []);
   return (
     <NavigationContainer>
       {!isLoggedIn && (
@@ -60,15 +65,10 @@ const App = (props: Props) => {
     </NavigationContainer>
   );
 };
+
 const styles = StyleSheet.create({
   logoutButton: {
     marginRight: 20,
   },
 });
-const mapStateToProps = (state: InitialStateProps) => {
-  return {
-    isLoggedIn: state.profile.isLoggedIn,
-  };
-};
-const mapDispatchToProps = {logout};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

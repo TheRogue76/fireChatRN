@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {
   Platform,
   KeyboardAvoidingView,
@@ -8,11 +8,12 @@ import {
 import {useHeaderHeight} from '@react-navigation/stack';
 
 interface Props extends KeyboardAvoidingViewProps {
-  children: any;
+  children: JSX.Element | JSX.Element[];
 }
 
-const PlatformView = (props: Props) => {
+export const PlatformView = memo((props: Props) => {
   const headerHeight = useHeaderHeight();
+
   const {children, style} = props;
   return (
     <>
@@ -28,5 +29,4 @@ const PlatformView = (props: Props) => {
       )}
     </>
   );
-};
-export default PlatformView;
+});

@@ -1,25 +1,24 @@
-import React, {useRef} from 'react';
-import {
-  FlatList,
-  FlatListProps,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from 'react-native';
-import ChatBox from './ChatBox';
-import {colors} from '../config/colors';
+import React, {useRef, memo} from 'react';
+import {FlatList, StyleSheet} from 'react-native';
+
+import {ChatBox} from './ChatBox';
+import {colors} from '@config';
 
 export interface Item {
   text: string;
   sender: string;
 }
 
-// interface Props {
-//   style: StyleProp<ViewStyle>;
-// }
+interface Props {
+  // style: StyleProp<ViewStyle>;
+  email: string;
+}
 
-const ChatList = (props: Props) => {
+export const ChatList = memo((props: Props) => {
+  const {email} = props;
+
   const FlatListRef = useRef<FlatList>(null);
+
   const state: Item[] = [
     {sender: 'Parsa', text: 'Hello'},
     {
@@ -31,18 +30,19 @@ const ChatList = (props: Props) => {
   ];
   return (
     <FlatList
-      style={[styles.container, props.style]}
+      style={[styles.container]}
       data={state}
       ref={FlatListRef}
       renderItem={({item, index}: {item: Item; index: number}) => (
-        <ChatBox sender={item.sender} index={index}>
+        <ChatBox sender={item.sender} index={index} email={email}>
           {item.text}
         </ChatBox>
       )}
       keyExtractor={(_item, index) => index.toString(10)}
     />
   );
-};
+});
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.screechingWhite,
@@ -50,4 +50,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-export default ChatList;

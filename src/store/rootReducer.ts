@@ -5,8 +5,10 @@ import {reducer as logoutReducer} from './actions/logout/logout';
 import {reducer as loadReducer} from './actions/load/load';
 
 const reducers = [loginReducer, signupReducer, logoutReducer, loadReducer];
+
 const rootReducer = (state = initialState, action: any) => {
   let newState;
+
   switch (action.type) {
     // put gobal reducers here
     default:

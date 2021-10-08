@@ -1,16 +1,17 @@
-import React, {forwardRef} from 'react';
+import React, {forwardRef, memo} from 'react';
 import {TextInput, TextInputProps, StyleSheet, View} from 'react-native';
-import {colors} from '../config/colors';
+import {colors} from '@config';
 
-const ChatInput = forwardRef(
-  (props: TextInputProps, ref?: React.Ref<TextInput>) => {
+export const ChatInput = memo(
+  forwardRef((props: TextInputProps, ref?: React.Ref<TextInput>) => {
     return (
       <View style={[styles.container, styles.height, props.style]}>
         <TextInput {...props} style={[styles.height, styles.input]} ref={ref} />
       </View>
     );
-  },
+  }),
 );
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
@@ -26,4 +27,3 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-export default ChatInput;

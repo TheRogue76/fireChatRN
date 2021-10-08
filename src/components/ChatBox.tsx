@@ -1,8 +1,6 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
 
-import {InitialStateProps} from '@src/interfaces';
 import {colors} from '@config';
 
 interface Props {
@@ -12,7 +10,7 @@ interface Props {
   email: string;
 }
 
-const ChatBox = (props: Props) => {
+export const ChatBox = memo((props: Props) => {
   const {sender, index, children, email} = props;
   return (
     <>
@@ -36,7 +34,8 @@ const ChatBox = (props: Props) => {
       )}
     </>
   );
-};
+});
+
 const styles = StyleSheet.create({
   containerSelf: {
     backgroundColor: colors.iMessageBlue,
@@ -97,9 +96,3 @@ const styles = StyleSheet.create({
     left: -20,
   },
 });
-const mapStateToProps = (state: InitialStateProps) => {
-  return {
-    email: state.profile.email,
-  };
-};
-export default connect(mapStateToProps, null)(ChatBox);

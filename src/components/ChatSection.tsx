@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Text, StyleSheet, Pressable, View} from 'react-native';
 
-import {colors} from '../config/colors';
-import ChatInput from './ChatInput';
+import {colors} from '@config';
+import {ChatInput} from './ChatInput';
 
-const ChatSection = () => {
+export const ChatSection = memo(() => {
   const messageSent = () => {
     console.log('message sent');
   };
@@ -16,7 +16,8 @@ const ChatSection = () => {
       </Pressable>
     </View>
   );
-};
+});
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
@@ -36,4 +37,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default ChatSection;

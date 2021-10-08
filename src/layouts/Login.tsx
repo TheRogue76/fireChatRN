@@ -1,11 +1,8 @@
 import React, {useState, useRef} from 'react';
 import {StyleSheet, Text, TextInput} from 'react-native';
 
-import {colors} from '../config/colors';
-
-import SimpleInput from '../components/SimpleInput';
-import SimpleButton from '../components/SimpleButton';
-import PlatformView from '../components/PlatformView';
+import {colors} from '@config';
+import {PlatformView, SimpleButton, SimpleInput} from '@components';
 
 interface Props {
   handlePress: (userName: string, passWord: string) => void;
@@ -14,9 +11,13 @@ interface Props {
 
 const Login = (props: Props) => {
   const {handlePress, goToSignUpPage} = props;
+
   const [userName, setUserName] = useState<string>('');
+
   const [passWord, setPassWord] = useState<string>('');
+
   const passwordRef = useRef<TextInput>(null);
+
   const switchTextInput = () => {
     if (passwordRef.current) {
       passwordRef.current.focus();

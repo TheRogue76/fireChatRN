@@ -9,9 +9,7 @@ import {saveState} from './src/store/storeStorage';
 import {name as appName} from './app.json';
 
 store.subscribe(() => {
-  saveState(store.getState()).then(() => {
-    // do sth upon successful state save
-  });
+  saveState(store.getState());
 });
 
 const ProvidedApp = () => {

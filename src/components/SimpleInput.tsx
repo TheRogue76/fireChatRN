@@ -1,16 +1,17 @@
-import React, {forwardRef} from 'react';
+import React, {forwardRef, memo} from 'react';
 import {TextInput, TextInputProps, StyleSheet, View} from 'react-native';
-import {colors} from '../config/colors';
+import {colors} from '@config';
 
-const SimpleInput = forwardRef(
-  (props: TextInputProps, ref?: React.Ref<TextInput>) => {
+export const SimpleInput = memo(
+  forwardRef((props: TextInputProps, ref?: React.Ref<TextInput>) => {
     return (
       <View style={[styles.container, styles.height, props.style]}>
         <TextInput {...props} style={[styles.height]} ref={ref} />
       </View>
     );
-  },
+  }),
 );
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 25,
@@ -21,4 +22,3 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
-export default SimpleInput;

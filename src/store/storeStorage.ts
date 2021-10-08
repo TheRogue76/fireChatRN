@@ -1,24 +1,20 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import MMKVStorage from 'react-native-mmkv-storage';
 
-import {load} from './actions/load/load';
+import {load} from '@store/actions';
 import {store} from './store';
-import {InitialStateProps} from '../interfaces';
+import {InitialStateProps} from '@src/interfaces';
+import {constants} from '@config';
 
-export const saveState = async (store: InitialStateProps) => {
-  try {
-    await AsyncStorage.setItem('state', JSON.stringify(store));
-  } catch (e) {
-    console.log(`failed to save state ${e}`);
-  }
+const dataBase = new MMKVStorage.Loader().withEncryption().initialize();
+
+export const saveState = (data: InitialStateProps) => {
+  dataBase.setMap(constants.storeName, data);
 };
-export const loadState = async () => {
-  try {
-    let strigifiedState = await AsyncStorage.getItem('state');
-    if (strigifiedState !== null) {
-      const newState = JSON.parse(strigifiedState);
-      store.dispatch(load(newState));
-    }
-  } catch (e) {
-    console.log(`failed to load state ${e}`);
+
+export const loadState = () => {
+  const loadedState = dataBase.getMap<InitialStateProps>(constants.storeName);
+
+  if (loadedState !== null) {
+    store.dispatch(load(loadedState));
   }
 };

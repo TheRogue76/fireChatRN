@@ -1,11 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {colors} from '../config/colors';
-
-import ChatSection from '../components/ChatSection';
-import ChatList from '../components/ChatList';
-import PlatformView from '../components/PlatformView';
+import {colors} from '@config';
+import {ChatList, ChatSection, PlatformView} from '@components';
 
 const Home = () => {
   return (
