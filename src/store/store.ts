@@ -3,7 +3,6 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './rootReducer';
 import {saga} from './rootSaga';
-import {loadState} from './storeStorage';
 
 // Saga setup
 const sagaMiddleWare = createSagaMiddleware();

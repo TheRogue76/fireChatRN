@@ -3,19 +3,14 @@ import {InitialStateProps} from '@src/interfaces';
 
 export const LOAD_STATE_FROM_MEMORY = 'LOAD_STATE_FROM_MEMORY';
 
-interface Action {
-  type: typeof LOAD_STATE_FROM_MEMORY;
-  data?: InitialStateProps;
-}
-
 export function load(state: InitialStateProps) {
   return {
     type: LOAD_STATE_FROM_MEMORY,
-    payload: state,
+    data: state,
   };
 }
 
-export function reducer(state = initialState, action: Action) {
+export function reducer(state = initialState, action: ReturnType<typeof load>) {
   const copyState = Object.assign({}, state);
 
   switch (action.type) {
