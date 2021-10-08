@@ -24,7 +24,7 @@ const ChatList = (props: Props) => {
     {sender: 'Parsa', text: 'Hello'},
     {
       sender: 'Imaginary',
-      text: 'Lol you fucking loserasdasdasdasdasdasdasdasdasdas',
+      text: 'Lol loserasdasdasdasdasdasdasdasdasdas',
     },
     {sender: 'Parsa', text: 'rude'},
     {sender: 'third dude', text: 'it is true'},

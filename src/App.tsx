@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, Pressable, Text, StyleSheet} from 'react-native';
+import {Platform, Pressable, Text, StyleSheet, I18nManager} from 'react-native';
 import {connect} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -21,6 +21,10 @@ interface Props {
 
 const App = (props: Props) => {
   const {isLoggedIn, logout} = props;
+  if (!I18nManager.isRTL) {
+    I18nManager.allowRTL(true);
+    I18nManager.forceRTL(true);
+  }
   const handlePress = () => {
     logout();
   };

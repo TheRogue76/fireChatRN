@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "801633198371",
+    "project_id": "fire-chat-1fa3c",
+    "storage_bucket": "fire-chat-1fa3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801633198371:android:5ebbf8e2b508ac02c1ec96",
+        "android_client_info": {
+          "package_name": "ir.nasirimehr.firechat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801633198371-sb9a30br5ak24h6ppp94j2mflonkq1ro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPwsde7HobUuu4R01OaRL9Iu1lKEOc3ZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801633198371-sb9a30br5ak24h6ppp94j2mflonkq1ro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
